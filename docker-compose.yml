@@ -19,6 +19,7 @@ services:
       - "5432:5432"
     environment: 
       POSTGRES_PASSWORD: password1234
+        - POSTGRES_HOST_AUTH_METHOD=trust
 
 volumes: 
   bundle-volume:
