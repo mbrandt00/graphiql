@@ -31,24 +31,24 @@ jobs:
     docker:
       - image: cimg/ruby:2.7.4-node # this is our primary docker image, where step commands run.
         auth:
-          username: mbrandt00
-          password: ENV['docker_password']  # context / project UI env-var reference
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.5-alpine
         auth:
-          username: mbrandt00
-          password: ENV['docker_password']  # context / project UI env-var reference
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment: # add POSTGRES environment variables.
           POSTGRES_USER: postgres
-          POSTGRES_DB: db
-          POSTGRES_PASSWORD: password1234
+          POSTGRES_DB: graphiql_development
+          POSTGRES_PASSWORD: "password1234"
     # environment variables specific to Ruby/Rails, applied to the primary container.
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
       PGHOST: 127.0.0.1
-      PGUSER: circleci-demo-ruby
-      PGPASSWORD: password1234
-      RAILS_ENV: test
+      PGUSER: postgres
+      PGPASSWORD: ""
+      RAILS_ENV: development
     # A series of steps to run, some are similar to those in "build".
     steps:
       - checkout
