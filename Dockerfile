@@ -5,7 +5,7 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt update && apt -y install nodejs yarn
 RUN mkdir /app
 WORKDIR /app 
-
+RUN yarn install --check-files
 COPY docker-entrypoint.sh docker-entrypoint.sh
 RUN chmod +x docker-entrypoint.sh 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
