@@ -31,12 +31,12 @@ jobs:
     docker:
       - image: cimg/ruby:2.7.4-node # this is our primary docker image, where step commands run.
         auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          username: mbrandt00
+          password: ENV['docker_password']  # context / project UI env-var reference
       - image: circleci/postgres:9.5-alpine
         auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          username: mbrandt00
+          password: ENV['docker_password']  # context / project UI env-var reference
         environment: # add POSTGRES environment variables.
           POSTGRES_USER: postgres
           POSTGRES_DB: db
@@ -46,7 +46,7 @@ jobs:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
       PGHOST: 127.0.0.1
-      PGUSER: circleci-demo-ruby
+      PGUSER: postgres
       PGPASSWORD: password1234
       RAILS_ENV: test
     # A series of steps to run, some are similar to those in "build".
